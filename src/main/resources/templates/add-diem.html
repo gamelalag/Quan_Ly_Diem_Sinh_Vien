@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nhập Điểm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h3>Nhập điểm cho Sinh viên</h3>
+        <form th:action="@{/diem/save}" th:object="${diem}" method="post" class="mt-4">
+
+            <div class="mb-3">
+                <label class="form-label">Chọn Sinh viên:</label>
+                <select th:field="*{sinhVien}" class="form-select" required>
+                    <option value="">-- Chọn Sinh viên --</option>
+                    <option th:each="sv : ${listSinhVien}" th:value="${sv.id}" th:text="${sv.maSV + ' - ' + sv.hoTen}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Chọn Môn học:</label>
+                <select th:field="*{monHoc}" class="form-select" required>
+                    <option value="">-- Chọn Môn học --</option>
+                    <option th:each="mh : ${listMonHoc}" th:value="${mh.id}" th:text="${mh.maMon + ' - ' + mh.tenMon}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Điểm số:</label>
+                <input type="number" step="0.1" min="0" max="10" th:field="*{diemSo}" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-success">Lưu điểm</button>
+            <a th:href="@{/diem}" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

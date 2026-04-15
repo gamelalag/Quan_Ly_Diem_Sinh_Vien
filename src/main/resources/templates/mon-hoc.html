@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Môn học</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+<nav class="mb-4">
+    <a th:href="@{/sinh-vien}" class="btn btn-outline-secondary">Quản lý Sinh viên</a>
+    <a th:href="@{/mon-hoc}" class="btn btn-primary">Quản lý Môn học</a>
+</nav>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Danh sách Môn học</h2>
+    <a th:href="@{/mon-hoc/add}" class="btn btn-success">Thêm Môn học mới</a>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+    <tr>
+        <th>ID</th>
+        <th>Mã Môn</th>
+        <th>Tên Môn Học</th>
+        <th>Số Tín Chỉ</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mh : ${listMonHoc}">
+        <td th:text="${mh.id}"></td>
+        <td th:text="${mh.maMon}"></td>
+        <td th:text="${mh.tenMon}"></td>
+        <td th:text="${mh.soTinChi}"></td>
+        <td>
+            <a th:href="@{'/mon-hoc/edit/' + ${mh.id}}" class="btn btn-warning btn-sm">Sửa</a>
+            <a th:href="@{'/mon-hoc/delete/' + ${mh.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Xóa môn này?')">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
